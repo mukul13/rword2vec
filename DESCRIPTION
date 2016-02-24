@@ -1,0 +1,10 @@
+Package: rword2vec
+Type: Package
+Title: R wrapper to google's word2vec
+Version: 1.1
+Author: Mukul Chaware[aut,cre]
+Maintainer: Mukul Chaware <mukul.chaware13@gmail.com>
+Description: R package to access google's word2vec.The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. The resulting word vector file can be used as features in many natural language processing and machine learning applications.
+License: MIT + file LICENSE
+LazyData: TRUE
+RoxygenNote: 5.0.1

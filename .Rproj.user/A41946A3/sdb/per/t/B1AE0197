@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @useDynLib word2vec\n#' @useDynLib distance\n#' @useDynLib word_analogy\n\n### main code\n\n#' to train text data\n#'\n#' @param layer1_size feature size\n#' @param train_file training text data\n#' @param save_vocab_file file name to save vocab data\n#' @param read_vocab_file file name to read vocab\n#' @param debug_mode debug mode\n#' @param binary output file format\n#' @param cbow training method used\n#' @param alpha alpha\n#' @param output_file output file name (MUST be binary)\n#' @param window window\n#' @param sample sample size\n#' @param hs hs\n#' @param negative negative\n#' @param num_threads number of threads\n#' @param iter iter\n#' @param min_count minimum count\n#' @param classes classes\n#' @export\n#' @examples\n#' model=word2vec(train_file = \"text8\",output_file = \"vec.bin\",binary=1)\nword2vec=function(layer1_size=0,train_file=0,save_vocab_file=0,read_vocab_file=0,\n                  debug_mode=0,binary=1,cbow=0,alpha=0,output_file=0,window=0,\n                  sample=0,hs=0,negative=0, num_threads=0,iter=0,min_count=0,classes=0)\n{\n  OUT = .C(\"word2vec\",rlayer1_size=as.character(layer1_size),\n           rtrain_file=as.character(train_file),\n           rsave_vocab_file=as.character(save_vocab_file),\n           rread_vocab_file=as.character(read_vocab_file),\n           rdebug_mode=as.character(debug_mode),\n           rbinary=as.character(binary),\n           rcbow=as.character(cbow),\n           ralpha=as.character(alpha),\n           routput_file=as.character(output_file),\n           rwindow=as.character(window),\n           rsample=as.character(sample),\n           rhs=as.character(hs),\n           rnegative=as.character(negative),\n           rnum_threads=as.character(num_threads),\n           riter=as.character(iter),\n           rmin_count=as.character(min_count),\n           rclasses=as.character(classes)\n           )\n  class(OUT) <- \"word2vec\"\n  names(OUT)[2] <- \"model_file\"\n  OUT\n}\n\n#' Gets closest words to the searched word\n#'\n#' @param file_name trained data file name (MUST be binary)\n#' @param search_word search keyword\n#' @param num number of closest words\n#' @return data frame giving closest words and cosine distances\n#' @export\n#' @examples\n#' dist=distance(\"vec.bin\",\"king\",20)\ndistance=function(file_name,search_word,num=15)\n{\n  OUT=.C(\"distance\",rfile_name=as.character(file_name),search_word=as.character(search_word),rN=as.integer(num),rbestw=as.character(rep(\"123\",num)),rbestd=as.double(rep(0,num)))\n  data=as.data.frame(cbind(OUT$rbestw,OUT$rbestd))\n  colnames(data)=c(\"word\",\"dist\")\n  data\n}\n\n#' Gets closest analogy to the searched word\n#'\n#' @param file_name trained data file name (MUST be binary)\n#' @param search_word search keywords\n#' @param num number of closest words\n#' @return data frame giving closest analogy and cosine distances\n#' @export\n#' @examples\n#' ana=word_analogy(\"vec.bin\",\"king queen man\",20)\n\nword_analogy=function(file_name,search_words,num=20)\n{\n  OUT=.C(\"word_analogy\",rfile_name=as.character(file_name),search_words=as.character(search_words),rN=as.integer(num),rbestw=as.character(rep(\"11\",num)),rbestd=as.double(rep(0,num)))\n  data=as.data.frame(cbind(OUT$rbestw,OUT$rbestd))\n  colnames(data)=c(\"word\",\"dist\")\n  data\n}\n\n",
+    "created" : 1456260267905.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2881986816",
+    "id" : "B1AE0197",
+    "lastKnownWriteTime" : 1456261284,
+    "last_content_update" : 1456261284049,
+    "path" : "~/Desktop/Mukul Backup/deep learning/rword2vec/R/word2vec.R",
+    "project_path" : "R/word2vec.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
