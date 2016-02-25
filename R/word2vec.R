@@ -88,3 +88,22 @@ word_analogy=function(file_name,search_words,num=20)
   data
 }
 
+#' to convert words to phrases
+#'
+#' @param train_file train file name
+#' @param output_file output file name
+#' @param debug_mode debug mode
+#' @param min_count minimum count
+#' @param threshold threshold value
+#' @return data frame giving closest analogy and cosine distances
+#' @export
+#' @examples
+#' model=word2phrase("text8","vec.txt")
+word2phrase=function(train_file,output_file,debug_mode=0,min_count=0,threshold=0)
+{
+  OUT=.C("word2phrase",rtrain_file=as.character(train_file),rdebug_mode=as.integer(debug_mode),routput_file=as.character(output_file),rmin_count=as.integer(min_count),rthreshold=as.double(threshold))
+  class(OUT) <- "word2vec"
+  names(OUT)[2] <- "model_file"
+  OUT
+}
+

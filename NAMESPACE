@@ -1,5 +1,6 @@
 export(distance)
 export(word2vec)
 export(word_analogy)
+export(word2phrase)
 useDynLib(rword2vec)
 
