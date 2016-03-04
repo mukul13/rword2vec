@@ -38,7 +38,7 @@ model=word2vec(train_file = "vec.txt",output_file = "vec2.bin",binary=1)
 To do word count
 ```R
 ### to count word occurences in input file
-vocab_count("text8","vocab.txt",min_count = 20)
+vocab_count(file_name="text8",vocab_file="vocab.txt",min_count = 20)
 ```
 
 ### Resources
