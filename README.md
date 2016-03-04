@@ -1,5 +1,5 @@
 # rword2vec
-R wrapper to google's word2vec.
+R wrapper to google's word2vec and GloVe
 The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. 
 
 ### Examples
@@ -33,6 +33,12 @@ word2phrase(train_file = "text8",output_file = "vec.txt")
 
 ### use this new text file to give word vectors
 model=word2vec(train_file = "vec.txt",output_file = "vec2.bin",binary=1)
+```
+
+To do word count
+```R
+### to count word occurences in input file
+vocab_count("text8","vocab.txt",min_count = 20)
 ```
 
 ### Resources
