@@ -189,7 +189,7 @@ void ReduceVocab() {
     while (vocab_hash[hash] != -1) hash = (hash + 1) % vocab_hash_size;
     vocab_hash[hash] = a;
   }
-  fflush(stdout);
+  //fflush(stdout);
   min_reduce++;
 }
 
@@ -268,7 +268,7 @@ void LearnVocabFromTrainFile() {
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
     printf("ERROR: training data file not found!\n");
-    exit(1);
+    return;
   }
   vocab_size = 0;
   AddWordToVocab((char *)"</s>");
@@ -278,7 +278,7 @@ void LearnVocabFromTrainFile() {
     train_words++;
     if ((debug_mode > 1) && (train_words % 100000 == 0)) {
       printf("%lldK%c", train_words / 1000, 13);
-      fflush(stdout);
+    //  fflush(stdout);
     }
     i = SearchVocab(word);
     if (i == -1) {
@@ -310,7 +310,7 @@ void ReadVocab() {
   FILE *fin = fopen(read_vocab_file, "rb");
   if (fin == NULL) {
     printf("Vocabulary file not found\n");
-    exit(1);
+    return;
   }
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
   vocab_size = 0;
@@ -329,7 +329,7 @@ void ReadVocab() {
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
     printf("ERROR: training data file not found!\n");
-    exit(1);
+    return;
   }
   fseek(fin, 0, SEEK_END);
   file_size = ftell(fin);
@@ -340,16 +340,16 @@ void InitNet() {
   long long a, b;
   unsigned long long next_random = 1;
   a = posix_memalign((void **)&syn0, 128, (long long)vocab_size * layer1_size * sizeof(real));
-  if (syn0 == NULL) {printf("Memory allocation failed\n"); exit(1);}
+  if (syn0 == NULL) {printf("Memory allocation failed\n"); return;}
   if (hs) {
     a = posix_memalign((void **)&syn1, 128, (long long)vocab_size * layer1_size * sizeof(real));
-    if (syn1 == NULL) {printf("Memory allocation failed\n"); exit(1);}
+    if (syn1 == NULL) {printf("Memory allocation failed\n"); return;}
     for (a = 0; a < vocab_size; a++) for (b = 0; b < layer1_size; b++)
      syn1[a * layer1_size + b] = 0;
   }
   if (negative>0) {
     a = posix_memalign((void **)&syn1neg, 128, (long long)vocab_size * layer1_size * sizeof(real));
-    if (syn1neg == NULL) {printf("Memory allocation failed\n"); exit(1);}
+    if (syn1neg == NULL) {printf("Memory allocation failed\n"); return;}
     for (a = 0; a < vocab_size; a++) for (b = 0; b < layer1_size; b++)
      syn1neg[a * layer1_size + b] = 0;
   }
@@ -380,7 +380,7 @@ void *TrainModelThread(void *id) {
         printf("%cAlpha: %f  Progress: %.2f%%  Words/thread/sec: %.2fk  ", 13, alpha,
          word_count_actual / (real)(iter * train_words + 1) * 100,
          word_count_actual / ((real)(now - start + 1) / (real)CLOCKS_PER_SEC * 1000));
-        fflush(stdout);
+    //    fflush(stdout);
       }
       alpha = starting_alpha * (1 - word_count_actual / (real)(iter * train_words + 1));
       if (alpha < starting_alpha * 0.0001) alpha = starting_alpha * 0.0001;

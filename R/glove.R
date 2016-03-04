@@ -3,7 +3,7 @@
 #' @param file_name text data
 #' @param vocab_file output vocab count file name
 #' @param max_vocab maximum vocab
-#' @para verbose verbose (0,1 or 2)
+#' @para verbose verbose 0,1 or 2)
 #' @param min_count minimum occurrence of word
 #' @return data frame giving word count
 #' @export

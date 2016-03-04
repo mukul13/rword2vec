@@ -11,7 +11,7 @@ word_analogy(file_name, search_words, num = 20)
 
 \item{num}{number of closest words}
 
-\item{search_word}{search keywords}
+\item{search_words}{search keywords}
 }
 \value{
 data frame giving closest analogy and cosine distances
@@ -20,6 +20,8 @@ data frame giving closest analogy and cosine distances
 Gets closest analogy to the searched word
 }
 \examples{
+\dontrun{
 ana=word_analogy("vec.bin","king queen man",20)
+}
 }
 

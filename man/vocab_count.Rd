@@ -14,6 +14,8 @@ vocab_count(file_name, vocab_file, verbose = 2, max_vocab = 0,
 
 \item{max_vocab}{maximum vocab}
 
+\item{verbose}{verbose (0,1 or 2)}
+
 \item{min_count}{minimum occurrence of word}
 }
 \value{
@@ -23,6 +25,8 @@ data frame giving word count
 Gets word count from the text data
 }
 \examples{
+\dontrun{
 data=vocab_count("text8","vocab.txt")
+}
 }
 

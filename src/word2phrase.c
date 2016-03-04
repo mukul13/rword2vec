@@ -151,7 +151,7 @@ void ReduceVocab1() {
     while (vocab_hash1[hash] != -1) hash = (hash + 1) % vocab_hash1_size1;
     vocab_hash1[hash] = a;
   }
-  fflush(stdout);
+  //fflush(stdout);
   min_reduce1++;
 }
 
@@ -163,7 +163,7 @@ void LearnVocabFromTrainFile1() {
   fin = fopen(train_file1, "rb");
   if (fin == NULL) {
     printf("ERROR: training data file not found!\n");
-    exit(1);
+    return;
   }
   vocab_size1 = 0;
   AddWordToVocab1((char *)"</s>");
@@ -177,7 +177,7 @@ void LearnVocabFromTrainFile1() {
     train_words1++;
     if ((debug_mode1 > 1) && (train_words1 % 100000 == 0)) {
       printf("Words processed: %lldK     Vocab size: %lldK  %c", train_words1 / 1000, vocab_size1 / 1000, 13);
-      fflush(stdout);
+   //   fflush(stdout);
     }
     i = SearchVocab1(word);
     if (i == -1) {
@@ -224,7 +224,7 @@ void TrainModel1() {
     cn++;
     if ((debug_mode1 > 1) && (cn % 100000 == 0)) {
       printf("Words written: %lldK%c", cn / 1000, 13);
-      fflush(stdout);
+    //  fflush(stdout);
     }
     oov = 0;
     i = SearchVocab1(word);

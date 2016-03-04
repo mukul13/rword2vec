@@ -73,7 +73,7 @@ distance=function(file_name,search_word,num=15)
 #' Gets closest analogy to the searched word
 #'
 #' @param file_name trained data file name (MUST be binary)
-#' @param search_word search keywords
+#' @param search_words search keywords
 #' @param num number of closest words
 #' @return data frame giving closest analogy and cosine distances
 #' @export

@@ -20,6 +20,8 @@ data frame giving closest words and cosine distances
 Gets closest words to the searched word
 }
 \examples{
+\dontrun{
 dist=distance("vec.bin","king",20)
+}
 }
 

@@ -44,7 +44,12 @@ word2vec(layer1_size = 0, train_file = 0, save_vocab_file = 0,
 
 \item{classes}{classes}
 }
+\description{
+to train text data
+}
 \examples{
+\dontrun{
 model=word2vec(train_file = "text8",output_file = "vec.bin",binary=1)
+}
 }
 

@@ -25,6 +25,8 @@ data frame giving closest analogy and cosine distances
 to convert words to phrases
 }
 \examples{
+\dontrun{
 model=word2phrase("text8","vec.txt")
+}
 }
 
