@@ -613,17 +613,6 @@ void TrainModel() {
   fclose(fo);
 }
 
-int ArgPos(char *str, int argc, char **argv) {
-  int a;
-  for (a = 1; a < argc; a++) if (!strcmp(str, argv[a])) {
-    if (a == argc - 1) {
-      printf("Argument missing for %s\n", str);
-      exit(1);
-    }
-    return a;
-  }
-  return -1;
-}
 
 void word2vec(char** rlayer1_size,char** rtrain_file,char** rsave_vocab_file,char** rread_vocab_file,char** rdebug_mode,char** rbinary,char** rcbow,char** ralpha,char** routput_file,char** rwindow,char** rsample,char** rhs,char** rnegative,char** rnum_threads,char** riter,char** rmin_count,char** rclasses) {
   int i;

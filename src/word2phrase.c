@@ -248,17 +248,6 @@ void TrainModel1() {
   fclose(fin);
 }
 
-int ArgPos1(char *str, int argc, char **argv) {
-  int a;
-  for (a = 1; a < argc; a++) if (!strcmp(str, argv[a])) {
-    if (a == argc - 1) {
-      printf("Argument missing for %s\n", str);
-      exit(1);
-    }
-    return a;
-  }
-  return -1;
-}
 
 void word2phrase(char **rtrain_file,int *rdebug_mode,char **routput_file,int *rmin_count,double *rthreshold) {
 /*  

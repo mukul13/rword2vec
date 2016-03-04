@@ -2,5 +2,6 @@ export(distance)
 export(word2vec)
 export(word_analogy)
 export(word2phrase)
+export(vocab_count)
 useDynLib(rword2vec)
 

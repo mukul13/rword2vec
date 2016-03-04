@@ -2,7 +2,7 @@
 % Please edit documentation in R/word2vec.R
 \name{word2vec}
 \alias{word2vec}
-\title{to train text data}
+\title{to train word2vec model}
 \usage{
 word2vec(layer1_size = 0, train_file = 0, save_vocab_file = 0,
   read_vocab_file = 0, debug_mode = 0, binary = 1, cbow = 0,
