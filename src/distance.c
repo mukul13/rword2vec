@@ -47,8 +47,11 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
     printf("Input file not found\n");
     return ;
   }
-  fscanf(f, "%lld", &words);
-  fscanf(f, "%lld", &size);
+  if(fscanf(f, "%lld", &words)==1)
+  {
+
+  if(fscanf(f, "%lld", &size)==1)
+  {
   vocab = (char *)malloc((long long)words * max_w * sizeof(char));
   for (a = 0; a < N; a++) bestw[a] = (char *)malloc(max_size * sizeof(char));
   M = (float *)malloc((long long)words * (long long)size * sizeof(float));
@@ -65,7 +68,11 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
       if ((a < max_w) && (vocab[b * max_w + a] != '\n')) a++;
     }
     vocab[b * max_w + a] = 0;
-    for (a = 0; a < size; a++) fread(&M[a + b * size], sizeof(float), 1, f);
+    for (a = 0; a < size; a++) 
+    {
+      if(fread(&M[a + b * size], sizeof(float), 1, f)==1);
+
+    }
     len = 0;
     for (a = 0; a < size; a++) len += M[a + b * size] * M[a + b * size];
     len = sqrt(len);
@@ -149,5 +156,6 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
         rbestd[a]=bestd[a];
      //   printf("%50s\t\t%f\n", bestw[a], bestd[a]);
       }
-  
+  }
+}
 }
