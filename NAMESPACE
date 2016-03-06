@@ -3,5 +3,6 @@ export(word2vec)
 export(word_analogy)
 export(word2phrase)
 export(vocab_count)
+export(bin_to_txt)
 useDynLib(rword2vec)
 

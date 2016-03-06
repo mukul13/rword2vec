@@ -1,8 +1,3 @@
-#' @useDynLib word2vec
-#' @useDynLib distance
-#' @useDynLib word_analogy
-
-### main code
 
 #' to train text data
 #'
@@ -107,3 +102,16 @@ word2phrase=function(train_file,output_file,debug_mode=0,min_count=0,threshold=0
   OUT
 }
 
+#' to convert binary file to text file
+#'
+#' @param bin_file binary file name
+#' @param txt_file text file name
+#' @return text file giving text file
+#' @export
+#' @examples
+#' bin_to_txt("binary_name.bin","txt_name.bin")
+bin_to_txt=function(bin_file,txt_file)
+{
+  d=.C("bin_to_txt",rfile_name=as.character(bin_file),routput_file=as.character(txt_file))
+  d
+}
