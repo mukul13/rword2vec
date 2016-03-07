@@ -318,7 +318,7 @@ void ReadVocab() {
     ReadWord(word, fin);
     if (feof(fin)) break;
     a = AddWordToVocab(word);
-    fscanf(fin, "%lld%c", &vocab[a].cn, &c);
+    if(fscanf(fin, "%lld%c", &vocab[a].cn, &c)==1);
     i++;
   }
   SortVocab();
