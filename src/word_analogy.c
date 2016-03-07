@@ -43,8 +43,8 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
     printf("Input file not found\n");
     return ;
   }
-  fscanf(f, "%lld", &words);
-  fscanf(f, "%lld", &size);
+  if(fscanf(f, "%lld", &words)==1);
+  if(fscanf(f, "%lld", &size)==1);
   vocab = (char *)malloc((long long)words * max_w * sizeof(char));
   M = (float *)malloc((long long)words * (long long)size * sizeof(float));
   if (M == NULL) {
@@ -59,7 +59,7 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
       if ((a < max_w) && (vocab[b * max_w + a] != '\n')) a++;
     }
     vocab[b * max_w + a] = 0;
-    for (a = 0; a < size; a++) fread(&M[a + b * size], sizeof(float), 1, f);
+    for (a = 0; a < size; a++) if(fread(&M[a + b * size], sizeof(float), 1, f)==1);
     len = 0;
     for (a = 0; a < size; a++) len += M[a + b * size] * M[a + b * size];
     len = sqrt(len);
