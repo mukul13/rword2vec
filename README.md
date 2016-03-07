@@ -3,7 +3,7 @@ R wrapper to google's word2vec and GloVe
 The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. 
 
 ### Examples
-To download sample text data, click [here](http://mattmahoney.net/dc/text8.zip -O text8.gz).
+To download sample text data, click [here](http://mattmahoney.net/dc/text8.zip).
 
 To install rowrd2vec package
 ```R
