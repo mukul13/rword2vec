@@ -4,7 +4,7 @@ Title: R Interface to Google's Word2vec
 Version: 1.1
 Author: Mukul Chaware[aut,cre]
 Maintainer: Mukul Chaware <mukul.chaware13@gmail.com>
-Description: R interface to access google's word2vec.The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. The resulting word vector file can be used as features in many natural language processing and machine learning applications.
+Description: R interface to access google's word2vec <https://code.google.com/archive/p/word2vec/>.The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. The resulting word vector file can be used as features in many natural language processing and machine learning applications.
 URL: https://github.com/mukul13/rword2vec
 License: MIT + file LICENSE
 LazyData: TRUE

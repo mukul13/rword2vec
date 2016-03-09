@@ -1,0 +1,106 @@
+---
+title: "rword2vec"
+author: "Mukul Chaware"
+date: "9 March 2016"
+output: pdf_document
+---
+
+R Interface to google's word2vec. <br />
+The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. 
+
+###Examples
+<br />
+To download sample text data, click [here](http://mattmahoney.net/dc/text8.zip).
+
+(Currently, Linux CPU only)<br/>
+To install rword2vec package:
+
+```{r eval=F}
+library(devtools)
+install_github("mukul13/rword2vec")
+```
+<br />
+To list all functions supported by rword2vec:<br />
+
+```{r}
+library(rword2vec)
+ls("package:rword2vec")
+```
+<br />
+<b>Training word2vec model</b>
+<br />
+To train text data to get word vectors:<br />
+```{r eval=F}
+model=word2vec(train_file = "text8",output_file = "vec.bin",binary=1)
+```
+<br />
+<b>Distance</b>
+<br />
+To get closest words:<br />
+```{r eval=T}
+### file_name must be binary
+dist=distance(file_name = "vec.bin",search_word = "king",num = 10)
+dist
+```
+<br />
+```{r eval=T}
+### file_name must be binary
+dist=distance(file_name = "vec.bin",search_word = "princess",num = 10)
+dist
+```
+<br />
+```{r eval=T}
+### file_name must be binary
+dist=distance(file_name = "vec.bin",search_word = "terrible",num = 10)
+dist
+```
+<br />
+<b>Word analogy</b><br />
+To get analogy or to observe strong regularities in the word vector space:<br />
+```{r eval=T}
+### file name must be binary
+ana=word_analogy(file_name = "vec.bin",search_words = "king queen man",num = 10)
+ana
+```
+<br />
+```{r eval=T}
+### file name must be binary
+ana=word_analogy(file_name = "vec.bin",search_words = "paris france berlin",num = 10)
+ana
+```
+<br />
+<b>Training word2phrase model</b><br />
+To convert words to phrases:<br />
+```{r eval=F}
+word2phrase(train_file = "text8",output_file = "vec.txt")
+
+### use this new text file to give word vectors
+model=word2vec(train_file = "vec.txt",output_file = "vec2.bin",binary=1)
+```
+<br />
+<b>Word count</b>
+<br />
+To do word count:<br />
+```{r eval=F}
+### to count word occurences in input file
+vocab_count(file_name="text8",vocab_file="vocab.txt",min_count = 20)
+d=read.table("vocab.txt")
+head(d)
+```
+```{r,eval=T,echo=F}
+{
+d=read.table("vocab.txt")
+head(d)
+}
+```
+<br />
+<b>Getting model as text file</b><br />
+To convert binary output file to text format:<br />
+```{r eval=F}
+###convert .bin to .txt
+bin_to_txt("vec.bin","vector.txt")
+```
+
+### Resources
+* [Github Repo](https://github.com/mukul13/rword2vec)
+* [word2vec](https://code.google.com/archive/p/word2vec/) 
