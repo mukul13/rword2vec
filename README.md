@@ -5,7 +5,6 @@ The word2vec tool takes a text corpus as input and produces the word vectors as 
 ### Examples
 To download sample text data, click [here](http://mattmahoney.net/dc/text8.zip).
 
-(Linux CPU only)
 To install rowrd2vec package
 ```R
 library(devtools)
