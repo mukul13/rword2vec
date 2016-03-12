@@ -14,7 +14,6 @@
 #' @param sample sample size
 #' @param hs hs
 #' @param negative negative
-#' @param num_threads number of threads
 #' @param iter iter
 #' @param min_count minimum count
 #' @param classes classes
@@ -23,7 +22,7 @@
 #' model=word2vec(train_file = "text8",output_file = "vec.bin",binary=1)
 word2vec=function(layer1_size=0,train_file=0,save_vocab_file=0,read_vocab_file=0,
                   debug_mode=0,binary=1,cbow=0,alpha=0,output_file=0,window=0,
-                  sample=0,hs=0,negative=0, num_threads=0,iter=0,min_count=0,classes=0)
+                  sample=0,hs=0,negative=0,iter=0,min_count=0,classes=0)
 {
   OUT = .C("word2vec",rlayer1_size=as.character(layer1_size),
            rtrain_file=as.character(train_file),
@@ -38,7 +37,6 @@ word2vec=function(layer1_size=0,train_file=0,save_vocab_file=0,read_vocab_file=0
            rsample=as.character(sample),
            rhs=as.character(hs),
            rnegative=as.character(negative),
-           rnum_threads=as.character(num_threads),
            riter=as.character(iter),
            rmin_count=as.character(min_count),
            rclasses=as.character(classes)
