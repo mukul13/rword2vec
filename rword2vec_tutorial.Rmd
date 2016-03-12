@@ -12,7 +12,7 @@ The word2vec tool takes a text corpus as input and produces the word vectors as 
 <br />
 To download sample text data, click [here](http://mattmahoney.net/dc/text8.zip).
 
-(Currently, Linux CPU only)<br/>
+<br/>
 To install rword2vec package:
 
 ```{r eval=F}
