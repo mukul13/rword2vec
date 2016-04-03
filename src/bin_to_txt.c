@@ -10,11 +10,11 @@ void bin_to_txt(char **rfile_name,char **routput_file) {
   long long max_w = 50;              // max length of vocabulary entries
 
   //long long N=20;
-  char st1[max_size];
-  char file_name[max_size], st[100][max_size];
-  float dist, len, vec[max_size];
+ // char st1[max_size];
+  char file_name[max_size];
+  float len;
 
-  long long words, size, a, b, c, d, cn, bi[100];
+  long long words, size, a, b;
   char ch;
   float *M;
   char *vocab;

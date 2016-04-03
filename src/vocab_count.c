@@ -174,7 +174,7 @@ void get_counts(char **rtrain_file,char **routput_file) {
 }
 
 void vocab_count(char **rfile_name,char **rvocab_file,int* rverbose,int* rmax_vocab, int* rmin_count) {
-    int i;
+  //  int i;
   /*  if (argc == 1) {
         printf("Simple tool to extract unigram counts\n");
         printf("Author: Jeffrey Pennington (jpennin@stanford.edu)\n\n");

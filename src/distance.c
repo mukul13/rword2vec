@@ -32,7 +32,7 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
   float dist, len, bestd[N], vec[max_size];
 
   long long words, size, a, b, c, d, cn, bi[100];
-  char ch;
+  //char ch;
   float *M;
   char *vocab;
 /*  if (argc < 2) {
@@ -70,7 +70,8 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
     vocab[b * max_w + a] = 0;
     for (a = 0; a < size; a++) 
     {
-      if(fread(&M[a + b * size], sizeof(float), 1, f)==1);
+      if(fread(&M[a + b * size], sizeof(float), 1, f)==1)
+        ;
 
     }
     len = 0;

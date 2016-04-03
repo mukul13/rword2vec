@@ -13,6 +13,7 @@
 //  limitations under the License.
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 //#include <malloc.h>
@@ -29,7 +30,7 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
   char file_name[max_size], st[100][max_size];
   float dist, len, bestd[N], vec[max_size];
   long long words, size, a, b, c, d, cn, bi[100];
-  char ch;
+ // char ch;
   float *M;
   char *vocab;
   /*if (argc < 2) {
@@ -43,8 +44,10 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
     printf("Input file not found\n");
     return ;
   }
-  if(fscanf(f, "%lld", &words)==1);
-  if(fscanf(f, "%lld", &size)==1);
+  if(fscanf(f, "%lld", &words)==1)
+    ;
+  if(fscanf(f, "%lld", &size)==1)
+    ;
   vocab = (char *)malloc((long long)words * max_w * sizeof(char));
   M = (float *)malloc((long long)words * (long long)size * sizeof(float));
   if (M == NULL) {
