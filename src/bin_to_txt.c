@@ -15,7 +15,7 @@ void bin_to_txt(char **rfile_name,char **routput_file) {
   float len;
 
   long long words, size, a, b;
-  char ch;
+ // char ch;
   float *M;
   char *vocab;
 
