@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <malloc.h>
+//#include <malloc.h>
 
 
 void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double *rbestd) {
