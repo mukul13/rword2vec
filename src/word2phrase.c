@@ -280,4 +280,3 @@ if (argc == 1) {
   TrainModel1();
  
 }
-

@@ -40,6 +40,8 @@ word2vec(layer1_size = 0, train_file = 0, save_vocab_file = 0,
 
 \item{min_count}{minimum count}
 
+\item{num_threads}{number of threads}
+
 \item{classes}{classes}
 }
 \description{
