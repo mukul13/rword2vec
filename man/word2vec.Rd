@@ -7,7 +7,7 @@
 word2vec(layer1_size = 0, train_file = 0, save_vocab_file = 0,
   read_vocab_file = 0, debug_mode = 0, binary = 1, cbow = 0,
   alpha = 0, output_file = 0, window = 0, sample = 0, hs = 0,
-  negative = 0, iter = 0, min_count = 0, classes = 0)
+  negative = 0, iter = 0, min_count = 0, classes = 0,num_threads=2)
 }
 \arguments{
 \item{layer1_size}{feature size}
