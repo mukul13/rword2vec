@@ -18,6 +18,8 @@ text file giving text file
 to convert binary file to text file
 }
 \examples{
+\dontrun{
 bin_to_txt("binary_name.bin","txt_name.bin")
+}
 }
 
