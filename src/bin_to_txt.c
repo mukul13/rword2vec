@@ -1,3 +1,5 @@
+#include "R.h"
+#include "Rmath.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,7 +26,7 @@ void bin_to_txt(char **rfile_name,char **routput_file) {
   FILE *f = fopen(file_name, "rb");
   FILE *fout =fopen(*routput_file,"wb");
   if (f == NULL) {
-    printf("Input file not found\n");
+    Rprintf("Input file not found\n");
     return ;
   }
   if(fscanf(f, "%lld", &words)==1) fprintf(fout,"%lld ",words);
@@ -34,7 +36,7 @@ void bin_to_txt(char **rfile_name,char **routput_file) {
   vocab = (char *)malloc((long long)words * max_w * sizeof(char));
     M = (float *)malloc((long long)words * (long long)size * sizeof(float));
   if (M == NULL) {
-    printf("Cannot allocate memory: %lld MB    %lld  %lld\n", (long long)words * size * sizeof(float) / 1048576, words, size);
+    Rprintf("Cannot allocate memory: %lld MB    %lld  %lld\n", (long long)words * size * sizeof(float) / 1048576, words, size);
     return ;
   }
   for (b = 0; b < words; b++) {

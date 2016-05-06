@@ -162,7 +162,7 @@ void LearnVocabFromTrainFile1() {
   for (a = 0; a < vocab_hash1_size1; a++) vocab_hash1[a] = -1;
   fin = fopen(train_file1, "rb");
   if (fin == NULL) {
-    printf("ERROR: training data file not found!\n");
+    Rprintf("ERROR: training data file not found!\n");
     return;
   }
   vocab_size1 = 0;
@@ -176,7 +176,7 @@ void LearnVocabFromTrainFile1() {
     } else start = 0;
     train_words1++;
     if ((debug_mode1 > 1) && (train_words1 % 100000 == 0)) {
-      printf("Words processed: %lldK     Vocab size: %lldK  %c", train_words1 / 1000, vocab_size1 / 1000, 13);
+      Rprintf("Words processed: %lldK     Vocab size: %lldK  %c", train_words1 / 1000, vocab_size1 / 1000, 13);
    //   fflush(stdout);
     }
     i = SearchVocab1(word);
@@ -197,8 +197,8 @@ void LearnVocabFromTrainFile1() {
   }
   SortVocab1();
   if (debug_mode1 > 0) {
-    printf("\nVocab size (unigrams + bigrams): %lld\n", vocab_size1);
-    printf("Words in train file: %lld\n", train_words1);
+    Rprintf("\nVocab size (unigrams + bigrams): %lld\n", vocab_size1);
+    Rprintf("Words in train file: %lld\n", train_words1);
   }
   fclose(fin);
 }
@@ -208,7 +208,7 @@ void TrainModel1() {
   char word[MAX_STRING1], last_word[MAX_STRING1], bigram_word[MAX_STRING1 * 2];
   real score;
   FILE *fo, *fin;
-  printf("Starting training using file %s\n", train_file1);
+  Rprintf("Starting training using file %s\n", train_file1);
   LearnVocabFromTrainFile1();
   fin = fopen(train_file1, "rb");
   fo = fopen(output_file1, "wb");
@@ -223,7 +223,7 @@ void TrainModel1() {
     }
     cn++;
     if ((debug_mode1 > 1) && (cn % 100000 == 0)) {
-      printf("Words written: %lldK%c", cn / 1000, 13);
+      Rprintf("Words written: %lldK%c", cn / 1000, 13);
     //  fflush(stdout);
     }
     oov = 0;

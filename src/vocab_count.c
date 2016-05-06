@@ -129,14 +129,14 @@ void get_counts(char **rtrain_file,char **routput_file) {
     //FILE *fid = stdin;
     FILE *fid = fopen(*rtrain_file, "rb");
     FILE *fo = fopen(*routput_file, "wb");
-    printf("BUILDING VOCABULARY\n");
-    if(verbose > 1) printf( "Processed %lld tokens\n", i);
+    Rprintf("BUILDING VOCABULARY\n");
+    if(verbose > 1) Rprintf( "Processed %lld tokens\n", i);
     sprintf(format,"%%%ds",MAX_STRING_LENGTH_VC);
     while(fscanf(fid, format, str) != EOF) { // Insert all tokens into hashtable
         hashinsert(vocab_hash, str);
-        if(((++i)%100000) == 0) if(verbose > 1) printf("Processed %lld tokens\n", i);
+        if(((++i)%100000) == 0) if(verbose > 1) Rprintf("Processed %lld tokens\n", i);
     }
-    if(verbose > 1) printf("Processed %lld tokens\n", i);
+    if(verbose > 1) Rprintf("Processed %lld tokens\n", i);
     vocab = malloc(sizeof(VOCAB) * vocab_size);
     for(i = 0; i < TSIZE; i++) { // Migrate vocab to array
         htmp = vocab_hash[i];
@@ -151,7 +151,7 @@ void get_counts(char **rtrain_file,char **routput_file) {
             htmp = htmp->next;
         }
     }
-    if(verbose > 1) printf( "Counted %lld unique words.\n", j);
+    if(verbose > 1) Rprintf( "Counted %lld unique words.\n", j);
     if(max_vocab > 0 && max_vocab < j)
         // If the vocabulary exceeds limit, first sort full vocab by frequency without alphabetical tie-breaks.
         // This results in pseudo-random ordering for words with same frequency, so that when truncated, the words span whole alphabet
@@ -161,14 +161,14 @@ void get_counts(char **rtrain_file,char **routput_file) {
     
     for(i = 0; i < max_vocab; i++) {
         if(vocab[i].count < min_count_vc) { // If a minimum frequency cutoff exists, truncate vocabulary
-            if(verbose > 0) printf("Truncating vocabulary at min count %lld.\n",min_count_vc);
+            if(verbose > 0) Rprintf("Truncating vocabulary at min count %lld.\n",min_count_vc);
             break;
         }
         fprintf(fo,"%s %lld\n",vocab[i].word,vocab[i].count);
     }
     
-    if(i == max_vocab && max_vocab < j) if(verbose > 0) printf("Truncating vocabulary at size %lld.\n", max_vocab);
-    printf("Using vocabulary of size %lld.\n\n", i);
+    if(i == max_vocab && max_vocab < j) if(verbose > 0) Rprintf("Truncating vocabulary at size %lld.\n", max_vocab);
+    Rprintf("Using vocabulary of size %lld.\n\n", i);
   fclose(fid);
   fclose(fo);
 }

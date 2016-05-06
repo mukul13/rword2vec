@@ -11,7 +11,8 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-
+#include "R.h"
+#include "Rmath.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,15 +37,15 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
   float *M;
   char *vocab;
 /*  if (argc < 2) {
-    printf("Usage: ./distance <FILE>\nwhere FILE contains word projections in the BINARY FORMAT\n");
+    Rprintf("Usage: ./distance <FILE>\nwhere FILE contains word projections in the BINARY FORMAT\n");
     return 0;
   }
 */
   strcpy(file_name,*rfile_name);
-  //printf("%s",file_name);
+  //Rprintf("%s",file_name);
   f = fopen(file_name, "rb");
   if (f == NULL) {
-    printf("Input file not found\n");
+    Rprintf("Input file not found\n");
     return ;
   }
   if(fscanf(f, "%lld", &words)==1)
@@ -56,13 +57,13 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
   for (a = 0; a < N; a++) bestw[a] = (char *)malloc(max_size * sizeof(char));
   M = (float *)malloc((long long)words * (long long)size * sizeof(float));
   if (M == NULL) {
-    printf("Cannot allocate memory: %lld MB    %lld  %lld\n", (long long)words * size * sizeof(float) / 1048576, words, size);
+    Rprintf("Cannot allocate memory: %lld MB    %lld  %lld\n", (long long)words * size * sizeof(float) / 1048576, words, size);
     return ;
   }
   for (b = 0; b < words; b++) {
     a = 0;
     while (1) {
-    //  printf("1");
+    //  Rprintf("1");
       vocab[b * max_w + a] = fgetc(f);
       if (feof(f) || (vocab[b * max_w + a] == ' ')) break;
       if ((a < max_w) && (vocab[b * max_w + a] != '\n')) a++;
@@ -84,7 +85,7 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
     for (a = 0; a < N; a++) bestw[a][0] = 0;
     
     strcpy(st1,*search_word);
-  printf("Entered word or sentence: %s\n",st1);
+  Rprintf("Entered word or sentence: %s\n",st1);
     a = 0;
     while (1) {
      // st1[a] = fgetc(stdin);
@@ -114,13 +115,13 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
       for (b = 0; b < words; b++) if (!strcmp(&vocab[b * max_w], st[a])) break;
       if (b == words) b = -1;
       bi[a] = b;
-      printf("\nWord: %s  Position in vocabulary: %lld\n", st[a], bi[a]);
+      Rprintf("\nWord: %s  Position in vocabulary: %lld\n", st[a], bi[a]);
       if (b == -1) {
-        printf("Out of dictionary word!\n");
+        Rprintf("Out of dictionary word!\n");
         break;
       }
     }
-   // printf("\n                                              Word       Cosine distance\n------------------------------------------------------------------------\n");
+   // Rprintf("\n                                              Word       Cosine distance\n------------------------------------------------------------------------\n");
     for (a = 0; a < size; a++) vec[a] = 0;
     for (b = 0; b < cn; b++) {
       if (bi[b] == -1) continue;
@@ -155,7 +156,7 @@ void distance(char **rfile_name,char **search_word,int *rN,char **rbestw,double 
         rbestw[a]=(char*)malloc(sizeof(char)*max_size);
         strcpy(rbestw[a],bestw[a]);
         rbestd[a]=bestd[a];
-     //   printf("%50s\t\t%f\n", bestw[a], bestd[a]);
+     //   Rprintf("%50s\t\t%f\n", bestw[a], bestd[a]);
       }
   }
 }

@@ -34,14 +34,14 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
   float *M;
   char *vocab;
   /*if (argc < 2) {
-    printf("Usage: ./word-analogy <FILE>\nwhere FILE contains word projections in the BINARY FORMAT\n");
+    Rprintf("Usage: ./word-analogy <FILE>\nwhere FILE contains word projections in the BINARY FORMAT\n");
     return 0;
   }
   */
   strcpy(file_name,*rfile_name);
   f = fopen(file_name, "rb");
   if (f == NULL) {
-    printf("Input file not found\n");
+    Rprintf("Input file not found\n");
     return ;
   }
   if(fscanf(f, "%lld", &words)==1)
@@ -51,7 +51,7 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
   vocab = (char *)malloc((long long)words * max_w * sizeof(char));
   M = (float *)malloc((long long)words * (long long)size * sizeof(float));
   if (M == NULL) {
-    printf("Cannot allocate memory: %lld MB    %lld  %lld\n", (long long)words * size * sizeof(float) / 1048576, words, size);
+    Rprintf("Cannot allocate memory: %lld MB    %lld  %lld\n", (long long)words * size * sizeof(float) / 1048576, words, size);
     return ;
   }
   for (b = 0; b < words; b++) {
@@ -105,16 +105,16 @@ void word_analogy(char **rfile_name,char **rst1,int *rN,char **rbestw,double *rb
     }
     cn++;
     if (cn < 3) {
-      printf("Only %lld words were entered.. three words are needed at the input to perform the calculation\n", cn);
+      Rprintf("Only %lld words were entered.. three words are needed at the input to perform the calculation\n", cn);
       return;
     }
     for (a = 0; a < cn; a++) {
       for (b = 0; b < words; b++) if (!strcmp(&vocab[b * max_w], st[a])) break;
       if (b == words) b = 0;
       bi[a] = b;
-      printf("\nWord: %s  Position in vocabulary: %lld\n", st[a], bi[a]);
+      Rprintf("\nWord: %s  Position in vocabulary: %lld\n", st[a], bi[a]);
       if (b == 0) {
-        printf("Out of dictionary word!\n");
+        Rprintf("Out of dictionary word!\n");
         return;
       }
     }

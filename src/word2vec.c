@@ -18,7 +18,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <time.h>
-
+#include <errno.h>
 #define MAX_STRING 100
 #define EXP_TABLE_SIZE 1000
 #define MAX_EXP 6
@@ -189,7 +189,7 @@ void ReduceVocab() {
     while (vocab_hash[hash] != -1) hash = (hash + 1) % vocab_hash_size;
     vocab_hash[hash] = a;
   }
-  fflush(stdout);
+ // fflush(stdout);
   min_reduce++;
 }
 
@@ -267,7 +267,7 @@ void LearnVocabFromTrainFile() {
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
-    printf("ERROR: training data file not found!\n");
+    Rprintf("ERROR: training data file not found!\n");
     exit(1);
   }
   vocab_size = 0;
@@ -277,8 +277,8 @@ void LearnVocabFromTrainFile() {
     if (feof(fin)) break;
     train_words++;
     if ((debug_mode > 1) && (train_words % 100000 == 0)) {
-      printf("%lldK%c", train_words / 1000, 13);
-      fflush(stdout);
+      Rprintf("%lldK%c", train_words / 1000, 13);
+    //  fflush(stdout);
     }
     i = SearchVocab(word);
     if (i == -1) {
@@ -289,8 +289,8 @@ void LearnVocabFromTrainFile() {
   }
   SortVocab();
   if (debug_mode > 0) {
-    printf("Vocab size: %lld\n", vocab_size);
-    printf("Words in train file: %lld\n", train_words);
+    Rprintf("Vocab size: %lld\n", vocab_size);
+    Rprintf("Words in train file: %lld\n", train_words);
   }
   file_size = ftell(fin);
   fclose(fin);
@@ -309,7 +309,7 @@ void ReadVocab() {
   char word[MAX_STRING];
   FILE *fin = fopen(read_vocab_file, "rb");
   if (fin == NULL) {
-    printf("Vocabulary file not found\n");
+    Rprintf("Vocabulary file not found\n");
     exit(1);
   }
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
@@ -323,12 +323,12 @@ void ReadVocab() {
   }
   SortVocab();
   if (debug_mode > 0) {
-    printf("Vocab size: %lld\n", vocab_size);
-    printf("Words in train file: %lld\n", train_words);
+    Rprintf("Vocab size: %lld\n", vocab_size);
+    Rprintf("Words in train file: %lld\n", train_words);
   }
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
-    printf("ERROR: training data file not found!\n");
+    Rprintf("ERROR: training data file not found!\n");
     exit(1);
   }
   fseek(fin, 0, SEEK_END);
@@ -346,7 +346,7 @@ void InitNet() {
   a = posix_memalign((void **)&syn0, 128, (long long)vocab_size * layer1_size * sizeof(real));
 #endif
 
-  if (syn0 == NULL) {printf("Memory allocation failed\n"); exit(1);}
+  if (syn0 == NULL) {Rprintf("Memory allocation failed\n"); exit(1);}
   if (hs) {
 //    a = posix_memalign((void **)&syn1, 128, (long long)vocab_size * layer1_size * sizeof(real));
 #ifdef _WIN32
@@ -355,7 +355,7 @@ void InitNet() {
     a = posix_memalign((void **)&(syn1), 128, (long long)vocab_size * layer1_size * sizeof(real));
 #endif 
 
-   if (syn1 == NULL) {printf("Memory allocation failed\n"); exit(1);}
+   if (syn1 == NULL) {Rprintf("Memory allocation failed\n"); exit(1);}
     for (a = 0; a < vocab_size; a++) for (b = 0; b < layer1_size; b++)
      syn1[a * layer1_size + b] = 0;
   }
@@ -367,7 +367,7 @@ void InitNet() {
     a = posix_memalign((void **)&(syn1neg), 128, (long long)vocab_size * layer1_size * sizeof(real));
 #endif
     
-if (syn1neg == NULL) {printf("Memory allocation failed\n"); exit(1);}
+if (syn1neg == NULL) {Rprintf("Memory allocation failed\n"); exit(1);}
     for (a = 0; a < vocab_size; a++) for (b = 0; b < layer1_size; b++)
      syn1neg[a * layer1_size + b] = 0;
   }
@@ -395,10 +395,10 @@ void *TrainModelThread(void *id) {
       last_word_count = word_count;
       if ((debug_mode > 1)) {
         now=clock();
-        printf("%cAlpha: %f  Progress: %.2f%%  Words/thread/sec: %.2fk  ", 13, alpha,
+        Rprintf("%cAlpha: %f  Progress: %.2f%%  Words/thread/sec: %.2fk  ", 13, alpha,
          word_count_actual / (real)(iter * train_words + 1) * 100,
          word_count_actual / ((real)(now - start + 1) / (real)CLOCKS_PER_SEC * 1000));
-        fflush(stdout);
+       // fflush(stdout);
       }
       alpha = starting_alpha * (1 - word_count_actual / (real)(iter * train_words + 1));
       if (alpha < starting_alpha * 0.0001) alpha = starting_alpha * 0.0001;
@@ -564,7 +564,7 @@ void TrainModel() {
   long a, b, c, d;
   FILE *fo;
   pthread_t *pt = (pthread_t *)malloc(num_threads * sizeof(pthread_t));
-  printf("Starting training using file %s\n", train_file);
+  Rprintf("Starting training using file %s\n", train_file);
   starting_alpha = alpha;
   if (read_vocab_file[0] != 0) ReadVocab(); else LearnVocabFromTrainFile();
   if (save_vocab_file[0] != 0) SaveVocab();
@@ -631,17 +631,6 @@ void TrainModel() {
   fclose(fo);
 }
 
-int ArgPos(char *str, int argc, char **argv) {
-  int a;
-  for (a = 1; a < argc; a++) if (!strcmp(str, argv[a])) {
-    if (a == argc - 1) {
-      printf("Argument missing for %s\n", str);
-      exit(1);
-    }
-    return a;
-  }
-  return -1;
-}
 
 
 void word2vec(char** rlayer1_size,char** rtrain_file,char** rsave_vocab_file,char** rread_vocab_file,char** rdebug_mode,char** rbinary,char** rcbow,char** ralpha,char** routput_file,char** rwindow,char** rsample,char** rhs,char** rnegative,char** riter,char** rmin_count,char** rclasses,char** rnum_threads) {
