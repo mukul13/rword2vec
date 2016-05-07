@@ -18,7 +18,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <time.h>
-#include <errno.h>
+
 #define MAX_STRING 100
 #define EXP_TABLE_SIZE 1000
 #define MAX_EXP 6
