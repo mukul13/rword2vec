@@ -90,7 +90,7 @@ word_analogy=function(file_name,search_words,num=20)
 #' @param debug_mode debug mode
 #' @param min_count minimum count
 #' @param threshold threshold value
-#' @return data frame giving closest analogy and cosine distances
+#' @return text file with unigrams and bigrams 
 #' @export
 #' @examples
 #' model=word2phrase("text8","vec.txt")

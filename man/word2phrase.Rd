@@ -19,7 +19,7 @@ word2phrase(train_file, output_file, debug_mode = 0, min_count = 0,
 \item{threshold}{threshold value}
 }
 \value{
-data frame giving closest analogy and cosine distances
+text file with unigrams and bigrams
 }
 \description{
 to convert words to phrases
