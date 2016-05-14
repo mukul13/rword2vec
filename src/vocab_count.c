@@ -21,7 +21,8 @@
 //    Jeffrey Pennington (jpennin@stanford.edu)
 //    GlobalVectors@googlegroups.com
 //    http://nlp.stanford.edu/projects/glove/
-
+#include "R.h"
+#include "Rmath.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
